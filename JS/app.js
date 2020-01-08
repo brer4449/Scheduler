@@ -4,9 +4,6 @@
   //Have button save data to local storage
 
 
-//https://devhints.io/moment
-//https://www.youtube.com/watch?v=I8LdKQHrdUY
-
 //Variable that shows today's date and time:
 let today = new Date();
 //Adding that variable to display in the DOM
