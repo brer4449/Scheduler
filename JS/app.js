@@ -9,3 +9,22 @@ let today = new Date();
 //Adding that variable to display in the DOM
 $("#currentDay").text(`Today's current date and time: ${today}`);
 
+let start = "2010-10-15";
+let result = moment(start).fromNow();
+console.log(result);
+
+$(document).ready(function(){
+  let jumbo = $("<div>");
+  jumbo.attr("class", "jumbotron");
+  $(".container").append(jumbo);
+
+  for(let i=0; i<10; i++){
+    let time = 900;
+    time = time + 100;
+    let timeDiv = $("<div>");
+    timeDiv.attr("class", "hour row time-block");
+    timeDiv.text(time);
+    jumbo.append(timeDiv);
+  }
+
+})
