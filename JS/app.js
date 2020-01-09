@@ -27,6 +27,9 @@ $(document).ready(function(){
     let task = $("<input>");
     task.attr("class", "past present future");
     timeDiv.append(task);
+    let saveBtn = $("<button>");
+    saveBtn.attr("class", "saveBtn");
+    timeDiv.append(saveBtn);
   }
 
 })
