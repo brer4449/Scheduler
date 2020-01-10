@@ -5,7 +5,7 @@
 
 
 //Variable that shows today's date and time:
-let today = new Date();
+let today = moment();
 //Adding that variable to display in the DOM
 $("#currentDay").text(`Today's current date and time: ${today}`);
 
@@ -13,21 +13,27 @@ $("#currentDay").text(`Today's current date and time: ${today}`);
 // let result = moment(start).fromNow();
 // console.log(result);
 $(document).ready(function(){
+  //Variable row is a new, empty div
   let row = $("<div>");
   row.attr("class", "row");
   $(".container").append(row);
+  //Variable currenthour is the string form of what hour it is right now
   let currentHour = moment().format("h");
+  //Need to parse that if we want to be able to work with numbers
   currentHour = parseInt(currentHour);
-  let setHour = moment().set("hour", 9).format("h");
-  setHour = parseInt(setHour);
-  console.log(currentHour);
-  
-  console.log(setHour);
+  //For loop to dynamically create columns of numbers, input fields, and save buttons
   for(let i=0; i<9; i++){
-    let time = ["9:00AM", "10:00AM", "11:00AM", "12:00PM", "1:00PM", "2:00PM", "3:00PM", "4:00PM", "5:00PM"]
+    //Array of hours we need to work with
+    let time = [9, 10, 11, 12, 1, 2, 3, 4, 5]
+    //timeDiv is new, empty div where all text content will be appended to
     let timeDiv = $("<div>");
     timeDiv.addClass("hour col-3 time-block");
-    timeDiv.text(time[i]);
+      if(8<time[i] && time[i]<12){
+        timeDiv.text(`${time[i]}:00AM`);
+      } else{
+        timeDiv.text(`${time[i]}:00PM`);
+      }
+    // timeDiv.text(time[i]);
     row.append(timeDiv);
     let input = $("<input>");
     input.addClass("col-8");
