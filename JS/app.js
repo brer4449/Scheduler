@@ -17,9 +17,9 @@ $(document).ready(function(){
   row.attr("class", "row");
   $(".container").append(row);
   let currentHour = moment().format("h");
-  let setHour = moment().set("hour", 12);
-  console.log(setHour);
+  let setHour = moment().set("hour", 9).format("h");
   console.log(currentHour);
+  console.log(setHour);
   for(let i=0; i<9; i++){
     let time = ["9:00AM", "10:00AM", "11:00AM", "12:00PM", "1:00PM", "2:00PM", "3:00PM", "4:00PM", "5:00PM"]
     let timeDiv = $("<div>");
@@ -27,11 +27,14 @@ $(document).ready(function(){
     timeDiv.text(time[i]);
     row.append(timeDiv);
     let input = $("<input>");
-    input.attr("class", "col-6");
-    
+    input.attr("class", "col-8");
+    if(currentHour<setHour && currentHour > 5){
+      input.attr("class", "past")
+    }
     row.append(input);
     let saveBtn = $("<button>");
-    saveBtn.attr("class", "saveBtn col-3");
+    saveBtn.text("Save");
+    saveBtn.attr("class", "saveBtn col-1");
     row.append(saveBtn);
     saveBtn.on("click", function(){
   
