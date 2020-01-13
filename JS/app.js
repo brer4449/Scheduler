@@ -16,43 +16,65 @@ $("#currentDay").text(`Today's current date and time: ${today}`);
 let currentHour = moment().format("H");
 //Need to parse that if we want to be able to work with numbers
 currentHour = parseInt(currentHour);
-let time = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-
+// let time = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+let task;
 $(document).ready(function () {
   let row = $("<div>");
   row.addClass("row");
   $(".container").append(row);
+  let time = [9, 10, 11, 12, 13, 14, 15, 16, 17];
   //For loop to dynamically create columns of numbers, input fields, and save buttons
-  for (let i = 0; i < 9; i++) {
-    time = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-    let timeDiv = $("<div>");
-    timeDiv.addClass("hour col-3 time-block");
-    timeDiv.text(time[i]);
-    timeDiv.text(`${time[i]}:00`);
-    row.append(timeDiv);
-    let inputTag = $("<input>");
-    inputTag.addClass(`col-8 ${i}`);
-    //if statement to dynamically change the color of the input field by adding class names
-    if (time[i] < currentHour) {
-      inputTag.addClass("past");
-    } else if (time[i] === currentHour) {
-      inputTag.addClass("present");
-    } else {
-      inputTag.addClass("future");
-    }
-    row.append(inputTag);
-    //Creates save button and appends it to row
-    let saveBtn = $("<button>");
-    saveBtn.text("Save");
-    saveBtn.addClass(`saveBtn col-1 ${i}`);
-    row.append(saveBtn);
-    saveBtn.on("click", function (e) {
-      e.preventDefault();
-      //Something like this(was watching Gary)
-      // let data = $(this).attr(`data-index = [${i}]`)
-      // let dataItem = inputTag.text();
+  function renderPage() {
+    for (let i = 0; i < 9; i++) {
+      let timeDiv = $("<div>");
+      timeDiv.addClass("hour col-3 time-block").text(`${time[i]}:00`);
+      row.append(timeDiv);
+      let inputTag = $("<input>");
+      inputTag.attr("data", `${i}`).addClass("col-8");
+      row.append(inputTag);
+      //if statement to dynamically change the color of the input field by adding class names
+      if (time[i] < currentHour) {
+        inputTag.addClass("past");
+      } else if (time[i] === currentHour) {
+        inputTag.addClass("present");
+      } else {
+        inputTag.addClass("future");
+      }
+      let saveBtn = $("<button>");
+      saveBtn.text("Save").attr("data", `${i}`).addClass("saveBtn col-1");
+      row.append(saveBtn);
+    };
+    // saveBtn.on("click", function () {
 
-      if ($(`saveBtn.${i}`).val() == $(`inputTag.${i}`).val()) {
+    // });
+  };
+
+
+  renderPage();
+});
+
+/*
+// saveBtn.on("click", function () {
+      //   console.log(saveBtn);
+      //   //Something like this(was watching Gary)
+      //   let data = $(this).attr(`data ${i}`)
+      //   let task = inputTag.val()
+      //   // task = data;
+      //   console.log(data);
+      //   // let dataItem = inputTag.text();
+      // });
+
+      // saveBtn.on("click", function () {
+      //Need these lines but they're wrong, some iteration of them...
+      // let userInput = inputTag.val();
+      // tasks = userInput;
+      // localStorage.setItem("tasks", JSON.stringify(tasks));
+      // });
+
+// if ($(`saveBtn.${i}`).val() == $(`inputTag.${i}`).val()) {
+    //   saveBtn.on("click", function () {
+
+if ($(`saveBtn.${i}`).val() == $(`inputTag.${i}`).val()) {
         let taskItem = $(`inputTag.${i}`).val()
         let tasks = JSON.parse(localStorage.getItem("tasks"));
         if (!tasks) {
@@ -62,15 +84,4 @@ $(document).ready(function () {
         console.log(taskItem);
         localStorage.setItem("tasks", JSON.stringify(tasks))
       };
-
-    });
-
-    // saveBtn.on("click", function () {
-    //Need these lines but they're wrong, some iteration of them...
-    // let userInput = inputTag.val();
-    // tasks = userInput;
-    // localStorage.setItem("tasks", JSON.stringify(tasks));
-    // });
-  };
-});
-
+*/
