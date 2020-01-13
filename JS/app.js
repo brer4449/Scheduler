@@ -43,13 +43,22 @@ $(document).ready(function () {
       let saveBtn = $("<button>");
       saveBtn.text("Save").attr("data", `${i}`).addClass("saveBtn col-1");
       row.append(saveBtn);
+      saveBtn.on("click", function () {
+        if (saveBtn.attr(`data${i}`) == inputTag.attr(`data${i}`)) {
+          // console.log("hello");
+          let userInput = inputTag.val()
+          let tasks = JSON.parse(localStorage.getItem("tasks"));
+          if (!tasks) {
+            tasks = [];
+          }
+          tasks.push(userInput);
+          console.log(userInput);
+          console.log(i)
+          localStorage.setItem("tasks", JSON.stringify(tasks))
+        }
+      });
     };
-    // saveBtn.on("click", function () {
-
-    // });
   };
-
-
   renderPage();
 });
 
