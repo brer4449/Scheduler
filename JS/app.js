@@ -13,17 +13,18 @@
 
 let today = moment();
 $("#currentDay").text(`Today's current date and time: ${today}`);
+let currentHour = moment().format("H");
+//Need to parse that if we want to be able to work with numbers
+currentHour = parseInt(currentHour);
+let time = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 $(document).ready(function () {
   let row = $("<div>");
   row.addClass("row");
   $(".container").append(row);
-  let currentHour = moment().format("H");
-  //Need to parse that if we want to be able to work with numbers
-  currentHour = parseInt(currentHour);
   //For loop to dynamically create columns of numbers, input fields, and save buttons
   for (let i = 0; i < 9; i++) {
-    let time = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+    time = [9, 10, 11, 12, 13, 14, 15, 16, 17];
     let timeDiv = $("<div>");
     timeDiv.addClass("hour col-3 time-block");
     timeDiv.text(time[i]);
@@ -45,8 +46,13 @@ $(document).ready(function () {
     saveBtn.text("Save");
     saveBtn.addClass(`saveBtn col-1 ${i}`);
     row.append(saveBtn);
-    if ($(`saveBtn.${i}`).val() == $(`inputTag.${i}`).val()) {
-      saveBtn.on("click", function () {
+    saveBtn.on("click", function (e) {
+      e.preventDefault();
+      //Something like this(was watching Gary)
+      // let data = $(this).attr(`data-index = [${i}]`)
+      // let dataItem = inputTag.text();
+
+      if ($(`saveBtn.${i}`).val() == $(`inputTag.${i}`).val()) {
         let taskItem = $(`inputTag.${i}`).val()
         let tasks = JSON.parse(localStorage.getItem("tasks"));
         if (!tasks) {
@@ -55,8 +61,10 @@ $(document).ready(function () {
         tasks.push(taskItem);
         console.log(taskItem);
         localStorage.setItem("tasks", JSON.stringify(tasks))
-      });
-    };
+      };
+
+    });
+
     // saveBtn.on("click", function () {
     //Need these lines but they're wrong, some iteration of them...
     // let userInput = inputTag.val();
@@ -65,3 +73,4 @@ $(document).ready(function () {
     // });
   };
 });
+
