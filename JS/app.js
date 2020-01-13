@@ -47,14 +47,14 @@ $(document).ready(function () {
         if (saveBtn.attr(`data${i}`) == inputTag.attr(`data${i}`)) {
           // console.log("hello");
           let userInput = inputTag.val()
-          let tasks = JSON.parse(localStorage.getItem("tasks"));
+          let tasks = JSON.parse(localStorage.getItem(`tasks${i}`, $(this).attr("data")));
           if (!tasks) {
             tasks = [];
           }
           tasks.push(userInput);
           console.log(userInput);
           console.log(i)
-          localStorage.setItem("tasks", JSON.stringify(tasks))
+          localStorage.setItem(`tasks${i}`, JSON.stringify(tasks))
         }
       });
     };
