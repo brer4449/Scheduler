@@ -1,7 +1,7 @@
 let today = moment();
 $("#currentDay").text(`Today's current date and time: ${today}`);
 let currentHour = moment().format("H");
-//Need to parse that if we want to be able to work with numbers
+//Need to parse so that if we want to be able to work with numbers we can
 currentHour = parseInt(currentHour);
 $(document).ready(function () {
   let row = $("<div>");
@@ -9,17 +9,17 @@ $(document).ready(function () {
   $(".container").append(row);
   let time = [9, 10, 11, 12, 13, 14, 15, 16, 17];
   //For loop to dynamically create columns of numbers, input fields, and save buttons
-  function renderPage() {
+  renderPage = () => {
     for (let i = 0; i < 9; i++) {
       let timeDiv = $("<div>");
       timeDiv.addClass("hour col-3 time-block").text(`${time[i]}:00`);
       row.append(timeDiv);
 
       let inputTag = $("<input>");
-      //setting attribute of data to be the current interation of i (numbers 0-8)
+      //setting attribute of data to be the current iteration of i (numbers 0-8)
       inputTag.attr("data", `${i}`).addClass("col-8");
       let tasks = localStorage.getItem(`tasks${i}`);
-      inputTag.val(tasks)
+      inputTag.val(tasks);
       row.append(inputTag);
 
       //if statement to dynamically change the color of the input field by adding class names
@@ -32,7 +32,7 @@ $(document).ready(function () {
       }
 
       let saveBtn = $("<button>");
-      //setting attribute of data to be the current interation of i (numbers 0-8)
+      //setting attribute of data to be the current iteration of i (numbers 0-8)
       saveBtn.text("Save").attr("data", `${i}`).addClass("saveBtn col-1");
       row.append(saveBtn);
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
           localStorage.setItem(`tasks${i}`, userInput);
         }
       });
-    };
+    }
   };
   renderPage();
 });
