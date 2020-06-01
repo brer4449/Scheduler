@@ -20,4 +20,3 @@ Project is created with:
 - FontAwesome version 5
 - jQuery version 3
 - Moment JS
-  test
